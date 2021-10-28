@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/rt.dir/lib/mathc/mathc.c.o CMakeFiles/rt.dir/src/main.c.o CMakeFiles/rt.dir/src/rt_texture.c.o CMakeFiles/rt.dir/src/rt_trace.c.o -o rt  -lm 

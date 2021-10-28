@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/doeringc/Projects/raytr01/build",
+  "command": "/usr/bin/cc  -I/home/doeringc/Projects/raytr01/include -I/home/doeringc/Projects/raytr01/lib/mathc -I/home/doeringc/Projects/raytr01/lib/stb -g -std=gnu11 -o CMakeFiles/rt.dir/lib/mathc/mathc.c.o -c /home/doeringc/Projects/raytr01/lib/mathc/mathc.c",
+  "file": "/home/doeringc/Projects/raytr01/lib/mathc/mathc.c"
+},
+{
+  "directory": "/home/doeringc/Projects/raytr01/build",
+  "command": "/usr/bin/cc  -I/home/doeringc/Projects/raytr01/include -I/home/doeringc/Projects/raytr01/lib/mathc -I/home/doeringc/Projects/raytr01/lib/stb -g -std=gnu11 -o CMakeFiles/rt.dir/src/main.c.o -c /home/doeringc/Projects/raytr01/src/main.c",
+  "file": "/home/doeringc/Projects/raytr01/src/main.c"
+},
+{
+  "directory": "/home/doeringc/Projects/raytr01/build",
+  "command": "/usr/bin/cc  -I/home/doeringc/Projects/raytr01/include -I/home/doeringc/Projects/raytr01/lib/mathc -I/home/doeringc/Projects/raytr01/lib/stb -g -std=gnu11 -o CMakeFiles/rt.dir/src/rt_texture.c.o -c /home/doeringc/Projects/raytr01/src/rt_texture.c",
+  "file": "/home/doeringc/Projects/raytr01/src/rt_texture.c"
+},
+{
+  "directory": "/home/doeringc/Projects/raytr01/build",
+  "command": "/usr/bin/cc  -I/home/doeringc/Projects/raytr01/include -I/home/doeringc/Projects/raytr01/lib/mathc -I/home/doeringc/Projects/raytr01/lib/stb -g -std=gnu11 -o CMakeFiles/rt.dir/src/rt_trace.c.o -c /home/doeringc/Projects/raytr01/src/rt_trace.c",
+  "file": "/home/doeringc/Projects/raytr01/src/rt_trace.c"
+}
+]
