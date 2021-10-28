@@ -91,12 +91,42 @@ int shader_ray_cb(struct rt_tracer *src, const float *point, const struct vec3 *
     return 1;
 }
 int shader_comp_cb(struct rt_tracer *src, const float *point, const float *src_arr, float *dst){
-    rt_texture_interp(&src->textures[0], &point[3], dst);
-    return 0;
+    //rt_texture_interp(&src->textures[0], &point[3], dst);
     dst[0] = rt_texture_at(&src->textures[0], point[3], point[4])[0];
     dst[1] = rt_texture_at(&src->textures[0], point[3], point[4])[1];
     dst[2] = rt_texture_at(&src->textures[0], point[3], point[4])[2];
+
+    struct vec3 dst_vec = svec3(dst[0], dst[1], dst[2]);
+
+    struct vec3 tmp;
+    for(size_t i = 0;i < src->split_n;i++){
+        tmp = svec3(
+                src_arr[i * src->dst_len + 0],
+                src_arr[i * src->dst_len + 1],
+                src_arr[i * src->dst_len + 2]);
+        printf("tmp: %f, %f, %f\n", tmp.x, tmp.y, tmp.z);
+        printf("dst: %f, %f, %f\n", dst_vec.x, dst_vec.y, dst_vec.z);
+        dst_vec = svec3_blend_rgb(dst_vec, tmp, 0.01);
+    }
+    dst[0] = dst_vec.x;
+    dst[1] = dst_vec.y;
+    dst[2] = dst_vec.z;
+    //printf("%f, %f, %f\n", dst[0], dst[1], dst[2]);
     return 0;
+
+#if 0
+
+    return 0;
+
+    nvec_scale(dst, dst, 0.5, src->dst_len);
+
+    float tmp[src->dst_len];
+    for(size_t i = 0;i < src->split_n;i++){
+        nvec_scale(tmp, &src_arr[i * src->dst_len], 1.0/(2 * src->split_n), src->dst_len);
+        nvec_add(dst, dst, tmp, src->dst_len);
+    }
+    return 1;
+
     for(size_t i = 0;i < src->dst_len;i++){
         dst[i] = 0;
         for(size_t j = 0;j < src->split_n;j++){
@@ -105,6 +135,7 @@ int shader_comp_cb(struct rt_tracer *src, const float *point, const float *src_a
         dst[i] += point[3 + i] * 1/(src->split_n + 1);
     }
     return 1;
+#endif
 }
 int shader_attr_cb(struct rt_tracer *src, float *dst, const float *src_varr[3], size_t len, const struct vec3 *src_uvt, size_t attr_idx){
     if(attr_idx == -1){

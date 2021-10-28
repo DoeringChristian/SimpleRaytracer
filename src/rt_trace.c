@@ -127,21 +127,23 @@ int rt_tracer_trace_rec(struct rt_tracer *tr, struct rt_ray *ray, float *dst, in
 
         tr->shader_ray_cb(tr, point, &rand, &ray_next);
 
-        rt_tracer_trace_rec(tr, &ray_next, &dst_arr[i * tr->dst_len], lvl-1);
+        if(rt_tracer_trace_rec(tr, &ray_next, &dst_arr[i * tr->dst_len], lvl-1) == 0){
+            nvec_zero(&dst_arr[tr->dst_len * i], tr->dst_len);
+        } 
     }
 
     // floats that are nan have to be reset to 0 to not poision the rest.
-#if 0
+#if 1
     for(size_t i = 0;i < tr->dst_len * tr->split_n;i++)
         if(isnan(dst_arr[i]))
-            //dst_arr[i] = 0;
+            dst_arr[i] = 0;
 #endif
 
     tr->shader_comp_cb(tr, point, dst_arr, dst);
 
     free(dst_arr);
 
-    return 0;
+    return 1;
 }
 
 int rt_tracer_calc_attr(struct rt_tracer *tr, float *dst, const struct vec3 *src_uvt, size_t src_idx){

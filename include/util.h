@@ -19,4 +19,17 @@ static inline struct vec3 rand_2sphere(){
     return rand;
 }
 
+static inline struct vec3 svec3_blend_rgb(struct vec3 src1, struct vec3 src2, float ratio){
+    struct vec3 dst = svec3(0, 0, 0);
+    dst.x = (src1.x * (1-ratio)) + (src2.x * ratio);
+    dst.y = (src1.y * (1-ratio)) + (src2.y * ratio);
+    dst.y = (src1.z * (1-ratio)) + (src2.z * ratio);
+
+    return dst;
+}
+
+static inline struct vec4 svec4_blend_rgba(struct vec4 src1, struct vec4 src2){
+
+}
+
 #endif //UTIL_H
